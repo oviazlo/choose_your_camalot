@@ -10,31 +10,33 @@ class Camalot(NamedTuple):
     weight: int
 
 size_dict = {
-    "BD": {
-        "0.3": (13.8, 23.4),
-        "0.4": (15.5, 26.7),
-        "0.5": (19.6, 33.5),
-        "0.75": (23.9, 41.2),
-        "1": (30.2, 52.1),
-        "2": (37.2, 64.9),
-        "3": (50.7, 87.9),
-        "4": (66.0, 114.0)
+    # https://blackdiamond-web.cdn.prismic.io/blackdiamond-web/f1e78696-cfb3-4824-9bff-a0ba977ef4ee_M13747_C_Camalot_C4-ULC4_IS-WEB.pdf
+    "BD C4": {
+        "0.3": (14.8, 21.0),
+        "0.4": (16.6, 23.8),
+        "0.5": (20.7, 29.8),
+        "0.75": (25.2, 36.2),
+        "1": (32.3, 45.7),
+        "2": (40.6, 57.2),
+        "3": (54.4, 77.5),
+        "4": (70.9, 102.4)
     },
+    # https://www.totemmt.com/documents/TotemCam_Instructions_For_Use.pdf
     "Totem": {
-        "0.5": (11.7, 18.9),
-        "0.65": (13.8, 22.5),
-        "0.8": (17, 27.7),
-        "1": (20.9, 34.2),
-        "1.25": (25.7, 42.3),
-        "1.5": (31.6, 52.2),
-        "1.8": (39.7, 64.2),
+        "0.5": (11.7, 17.1),
+        "0.65": (13.8, 20.3),
+        "0.8": (17, 25.0),
+        "1": (20.9, 30.9),
+        "1.25": (25.7, 38.1),
+        "1.5": (31.6, 47),
+        "1.8": (39.7, 58.1),
     }
 }
 
 bin_borders = set([c[0] for _, c in size_dict["Totem"].items()] +
                   [c[1] for _, c in size_dict["Totem"].items()] +
-                  [c[0] for _, c in size_dict["BD"].items()] +
-                  [c[1] for _, c in size_dict["BD"].items()])
+                  [c[0] for _, c in size_dict["BD C4"].items()] +
+                  [c[1] for _, c in size_dict["BD C4"].items()])
 bin_borders = sorted(list(bin_borders))
 
 
@@ -73,12 +75,11 @@ def get_cam_count(camalots):
 def make_camalot_summary_plot():
     # create a list of camalots
     Alex_camalots = [
-        make_camalot("BD", "0.5"),
-        make_camalot("BD", "0.75"),
-        make_camalot("BD", "1"),
-        make_camalot("BD", "2"),
+        make_camalot("BD C4", "0.5"),
+        make_camalot("BD C4", "0.75"),
+        make_camalot("BD C4", "1"),
+        make_camalot("BD C4", "2"),
         make_camalot("Totem", "1.8"),
-        make_camalot("Totem", "0.65"),
     ]
 
     Juno_camalots = [
@@ -86,10 +87,10 @@ def make_camalot_summary_plot():
         make_camalot("Totem", "0.8"),
         make_camalot("Totem", "1.25"),
         make_camalot("Totem", "1.8"),
-        make_camalot("BD", "3"),
-        make_camalot("BD", "1"),
-        make_camalot("BD", "0.4"),
-        make_camalot("BD", "0.5"),
+        make_camalot("BD C4", "0.4"),
+        make_camalot("BD C4", "0.5"),
+        make_camalot("BD C4", "1"),
+        make_camalot("BD C4", "3"),
     ]
 
     all_cams_count, all_cams_count_weighted = get_cam_count(Alex_camalots + Juno_camalots)
